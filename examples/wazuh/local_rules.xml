@@ -1,0 +1,36 @@
+<!--
+  Reglas de ejemplo para Wazuh (manager): /var/ossec/etc/rules/local_rules.xml
+
+  Como ids-ml emite JSON, Wazuh lo decodifica automáticamente y cada campo
+  queda accesible como json.<campo> (no hace falta decoder propio). Estas
+  reglas elevan el nivel según la severidad que ya calcula la herramienta.
+
+  Tras editar, reinicia el manager:
+    sudo systemctl restart wazuh-manager
+-->
+<group name="ids_ml,">
+
+  <!-- Regla base: cualquier evento de la integración ids-ml. -->
+  <rule id="100200" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="integration">ids-ml</field>
+    <description>IDS-ML: flujo de red anómalo detectado</description>
+  </rule>
+
+  <!-- Severidad media. -->
+  <rule id="100201" level="7">
+    <if_sid>100200</if_sid>
+    <field name="severity">medium</field>
+    <description>IDS-ML: anomalía de red de severidad MEDIA ($(src) -> $(dst))</description>
+    <group>anomaly_detection,</group>
+  </rule>
+
+  <!-- Severidad alta: candidata a disparar respuesta activa. -->
+  <rule id="100202" level="12">
+    <if_sid>100200</if_sid>
+    <field name="severity">high</field>
+    <description>IDS-ML: anomalía de red de severidad ALTA ($(src) -> $(dst))</description>
+    <group>anomaly_detection,attack,</group>
+  </rule>
+
+</group>

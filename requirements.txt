@@ -1,0 +1,17 @@
+# Extracción de características de flujos desde PCAP / interfaz
+nfstream>=6.5
+
+# Núcleo de datos y ML
+pandas>=2.1
+numpy>=1.26
+scikit-learn>=1.4
+joblib>=1.3
+
+# Explicabilidad de las detecciones
+shap>=0.44
+
+# CLI y salida en consola
+rich>=13.7
+
+# (Opcional) modelo supervisado si algún día tienes datos etiquetados
+xgboost>=2.0

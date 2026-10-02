@@ -1,0 +1,12 @@
+<!--
+  Añade este bloque dentro de <ossec_config> en el ossec.conf del AGENTE que
+  va a leer las alertas de ids-ml. Ajusta la ruta <location> a tu equipo.
+
+  Tras guardarlo, reinicia el agente:
+    - Windows:  Restart-Service -Name WazuhSvc
+    - Linux:    sudo systemctl restart wazuh-agent
+-->
+<localfile>
+  <log_format>json</log_format>
+  <location>C:\Users\lizaso.igor\Documents\ProyectoCiber\outputs\ids_ml_alerts.json</location>
+</localfile>

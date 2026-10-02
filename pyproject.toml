@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ids-ml"
+version = "0.2.0"
+description = "Analizador de capturas de red con detección de anomalías por ML e integración con Wazuh"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Igor Lizaso" }]
+keywords = ["ids", "network", "anomaly-detection", "wazuh", "pcap", "security"]
+
+dependencies = [
+    "nfstream>=6.5",
+    "pandas>=2.1",
+    "numpy>=1.26",
+    "scikit-learn>=1.4",
+    "joblib>=1.3",
+    "rich>=13.7",
+]
+
+[project.optional-dependencies]
+# Explicabilidad avanzada (opcional; el detector ya explica sin esto).
+explain = ["shap>=0.44"]
+# Modelo supervisado opcional si algún día tienes datos etiquetados.
+supervised = ["xgboost>=2.0"]
+# Herramientas de desarrollo.
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+# Tras `pip install -e .` tendrás el comando `ids-ml` en tu PATH.
+ids-ml = "ids_ml.cli:main"
+
+[project.urls]
+Documentation = "./docs"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true

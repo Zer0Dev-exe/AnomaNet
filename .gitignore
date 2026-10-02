@@ -1,0 +1,44 @@
+# --- Datos y artefactos generados (no versionar) ---
+data/
+*.pcap
+*.pcapng
+*.csv
+*.parquet
+
+# Modelos entrenados y salidas de la herramienta
+models/*
+!models/.gitkeep
+outputs/*
+!outputs/.gitkeep
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Configuración local
+.env
+
+# Tests y cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
